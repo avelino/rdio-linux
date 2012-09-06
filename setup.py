@@ -17,5 +17,5 @@ setup(
     url='http://rdio.com/',
     author=rdio.player.__author__,
     license=rdio.player.__license__,
-    scripts=['rdio/player/rdio-player'],
-    install_requires=['pygtk', 'pywebkitgtk'],)
+    scripts=['rdio/player/rdio-player'],)
+#    install_requires=['pygtk', 'pywebkitgtk'],)
