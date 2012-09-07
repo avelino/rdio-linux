@@ -25,5 +25,5 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Widget Sets',
         'Topic :: Utilities'],
-    scripts=['rdio/player/rdio-player'],)
+    scripts=['rdio/player/rdio-player', 'rdio/player/icon.png'],)
 #    install_requires=['pygtk', 'pywebkitgtk'],)
