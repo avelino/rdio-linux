@@ -35,10 +35,36 @@ view.set_settings(browser)
 
 view.open('https://www.rdio.com/signin/')
 
-window.add(view)
+
+# Menu Rdio
+mb = gtk.MenuBar()
+
+menu_rdio = gtk.Menu()
+menu_rdio_i = gtk.MenuItem("Rdio")
+menu_rdio_i.set_submenu(menu_rdio)
+
+def menu_rdio_about(widget):
+    pass
+
+menu_rdio_i_about = gtk.MenuItem("About Rdio")
+menu_rdio_i_about.connect("activate", menu_rdio_about)
+menu_rdio.append(menu_rdio_i_about)
+
+menu_rdio_i_exit = gtk.MenuItem("Quit Rdio")
+menu_rdio_i_exit.connect("activate", gtk.main_quit)
+menu_rdio.append(menu_rdio_i_exit)
+
+mb.append(menu_rdio_i)
+
+
+# Render objects
+vbox = gtk.VBox(False, 2)
+vbox.pack_start(mb, False, False, 0)
+vbox.pack_start(view, True, False, 0)
+
+# Window render
+window.add(vbox)
 window.show_all()
-
-
 window.connect('delete-event', lambda window, event: gtk.main_quit())
 
 gtk.main()
