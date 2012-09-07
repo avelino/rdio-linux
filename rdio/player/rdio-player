@@ -43,6 +43,13 @@ menu_rdio = gtk.Menu()
 menu_rdio_i = gtk.MenuItem("Rdio")
 menu_rdio_i.set_submenu(menu_rdio)
 
+def menu_rdio_about(widget):
+    pass
+
+menu_rdio_i_about = gtk.MenuItem("About Rdio")
+menu_rdio_i_about.connect("activate", menu_rdio_about)
+menu_rdio.append(menu_rdio_i_about)
+
 menu_rdio_i_exit = gtk.MenuItem("Quit Rdio")
 menu_rdio_i_exit.connect("activate", gtk.main_quit)
 menu_rdio.append(menu_rdio_i_exit)
