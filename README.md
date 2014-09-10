@@ -7,6 +7,15 @@ Application RDIO for Linux
 Install
 =======
 
+Install using 
+
+```
+python2 setup.py install
+```
+
+You will need to install the dependencies listed below first as well (you may
+also do this via your distribution's package manager).
+
 PyGTK
 -----
 
