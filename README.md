@@ -40,3 +40,12 @@ $ ./configure
 $ make
 $ sudo make install
 ```
+
+Uninstall
+---------
+You will need to manually delete
+
+```bash
+# rm /usr/share/rdio
+# rm /usr/share/applications/rdio.desktop
+```

@@ -4,7 +4,7 @@ import gtk
 import webkit
 import gobject
 import os
-
+import version
 
 # init thread
 gobject.threads_init()
@@ -22,13 +22,9 @@ def destroy(data=None):
     gtk.main_quit()
 
 # set icon
-def get_resource_path(rel_path):
-    dir_of_py_file = os.path.dirname(__file__)
-    rel_path_to_resource = os.path.join(dir_of_py_file, rel_path)
-    abs_path_to_resource = os.path.abspath(rel_path_to_resource)
-    return abs_path_to_resource
+icon = '/usr/share/rdio/icon.png'
 
-window.set_icon_from_file(get_resource_path("icon.png"))
+window.set_icon_from_file(icon)
 
 # create a scrolled window
 scroll = gtk.ScrolledWindow()
@@ -55,11 +51,10 @@ menu_rdio_i.set_submenu(menu_rdio)
 
 def menu_rdio_about(widget):
     about = gtk.AboutDialog()
-    about.set_program_name("RDIO for Linux")
-    about.set_comments("Application RDIO for Linux.")
-    about.set_version("0.0.1")
-    about.set_website("https://github.com/avelino/rdio-linux")
-    about.set_logo(gtk.gdk.pixbuf_new_from_file_at_size("icon.png", 64, 64))
+    about.set_program_name('%s v%s' % (version.__appname__, version.__version__))
+    about.set_comments('by %s\n\n%s' % (version.__author__, version.__description__))
+    about.set_website(version.__website__)
+    about.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(icon, 64, 64))
     about.run()
     about.destroy()
 
