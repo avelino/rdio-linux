@@ -1,7 +1,7 @@
 import os
 import sys
 from shutil import copyfile
-from rdio.player import version
+import rdio.player.version as rpv
 
 # Downloads setuptools if not find it before try to import
 try:
@@ -13,13 +13,13 @@ except ImportError:
 from setuptools import setup
 
 setup(
-    name='rdio',
-    version=version.__version__,
-    description=version.__description__,
+    name='rdio.player',
+    version=rpv.__version__,
+    description=rpv.__description__,
     url='https://www.rdio.com/',
-    author=version.__author__,
-    author_email=version.__author_email__,
-    license=version.__license__,
+    author=rpv.__author__,
+    author_email=rpv.__author_email__,
+    license=rpv.__license__,
     data_files=[('', ['rdio/player/icon.png'])],
     classifiers=['Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
@@ -39,10 +39,10 @@ copyfile('rdio/player/icon.png', '%s/icon.png' % dest)
 # Add menu entry!
 menu_entry = [
     '[Desktop Entry]',
-    'Version='+version.__version__,
-    'Name='+version.__appname__,
+    'Version='+rpv.__version__,
+    'Name='+rpv.__appname__,
     'GenericName=Rdio Player',
-    'Comment='+version.__description__,
+    'Comment='+rpv.__description__,
     'Icon=/usr/share/rdio/icon.png',
     'Exec=rdio-player',
     'Type=Application',
