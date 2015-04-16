@@ -13,8 +13,13 @@ window = gtk.Window()
 window.set_title('Rdio for Linux')
 
 # set size and position
-window.resize(gtk.gdk.screen_width()-100,800)
-window.move(0,0)
+window.set_default_size(1024, 700)
+window.set_position(gtk.WIN_POS_CENTER)
+
+
+def destroy(data=None):
+    # terminates the current main loop
+    gtk.main_quit()
 
 # set icon
 def get_resource_path(rel_path):
@@ -25,6 +30,9 @@ def get_resource_path(rel_path):
 
 window.set_icon_from_file(get_resource_path("icon.png"))
 
+# create a scrolled window
+scroll = gtk.ScrolledWindow()
+scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 
 view = webkit.WebView()
 browser = view.get_settings()
@@ -35,6 +43,7 @@ view.set_settings(browser)
 
 view.open('https://www.rdio.com/signin/')
 
+scroll.add(view)
 
 # Menu Rdio
 mb = gtk.MenuBar()
@@ -43,28 +52,36 @@ menu_rdio = gtk.Menu()
 menu_rdio_i = gtk.MenuItem("Rdio")
 menu_rdio_i.set_submenu(menu_rdio)
 
+
 def menu_rdio_about(widget):
-    pass
+    about = gtk.AboutDialog()
+    about.set_program_name("RDIO for Linux")
+    about.set_comments("Application RDIO for Linux.")
+    about.set_version("0.0.1")
+    about.set_website("https://github.com/avelino/rdio-linux")
+    about.set_logo(gtk.gdk.pixbuf_new_from_file_at_size("icon.png", 64, 64))
+    about.run()
+    about.destroy()
 
 menu_rdio_i_about = gtk.MenuItem("About Rdio")
 menu_rdio_i_about.connect("activate", menu_rdio_about)
 menu_rdio.append(menu_rdio_i_about)
 
 menu_rdio_i_exit = gtk.MenuItem("Quit Rdio")
-menu_rdio_i_exit.connect("activate", gtk.main_quit)
+menu_rdio_i_exit.connect("activate", destroy)
 menu_rdio.append(menu_rdio_i_exit)
 
 mb.append(menu_rdio_i)
 
-
 # Render objects
-vbox = gtk.VBox(False, 2)
+vbox = gtk.VBox(False, 0)
 vbox.pack_start(mb, False, False, 0)
-vbox.pack_start(view, True, False, 0)
+vbox.pack_end(scroll, True, True, 0)
 
 # Window render
 window.add(vbox)
+
 window.show_all()
-window.connect('delete-event', lambda window, event: gtk.main_quit())
+window.connect('destroy', destroy)
 
 gtk.main()
